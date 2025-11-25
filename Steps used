@@ -1,0 +1,40 @@
+1.Create VP
+  Go to VPC → Your VPCs → Create VPC
+  Name: project-vpc
+  IPv4 CIDR block: 10.0.0.0/16
+  Create.
+2.Create Public Subnet
+  Go to Subnets → Create subnet
+  VPC: project-vpc
+  Subnet name: public-subnet-1
+  CIDR block: 10.0.1.0/24
+  After creation: enable Auto-assign public IPv4.
+3.Create Private Subnet
+  Create another subnet:
+      Name: private-subnet-1
+      CIDR: 10.0.2.0/24
+  Do not auto-assign public IPs.
+4.Create Internet Gateway
+  Go to Internet Gateways → Create
+  Name: project-igw
+  Attach to project-vpc.
+5.Create NAT Gateway (optional but recommended)
+  Create an Elastic IP.
+  Go to NAT Gateways → Create NAT gateway
+  Subnet: public-subnet-1
+  Elastic IP: the one you created.
+  Create and wait until available.
+6.Configure Route Tables
+  Public route table:
+      Go to Route tables → Create name public-rt.
+      Associate with public-subnet-1.
+      Add route: 0.0.0.0/0 → Internet Gateway (project-igw).
+  Private route table:
+      Create private-rt.
+      Associate with private-subnet-1.
+      Add route: 0.0.0.0/0 → NAT Gateway.
+7.Launch Test EC2 Instances
+  One in public-subnet-1 with public IP:
+      Should be reachable from the internet (with correct SG).
+  One in private-subnet-1:
+      No public IP, but can reach internet via NAT for updates.
