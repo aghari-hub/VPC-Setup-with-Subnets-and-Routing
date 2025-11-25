@@ -1,0 +1,6 @@
+
+VPC: A logically isolated virtual network where you launch cloud resources (e.g., EC2 instances).
+Subnet: A range of IP addresses within a VPC. Subnets are confined to a single Availability Zone (AZ), which improves application resiliency.
+Route Table: A set of rules (routes) that determines where network traffic from your subnet is directed.
+Internet Gateway (IGW): A component that allows communication between resources in your VPC and the internet.
+NAT Gateway: A service that enables instances in a private subnet to initiate outbound internet traffic while preventing unsolicited inbound connections from the internet. 
